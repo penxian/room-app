@@ -1,5 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
-
+export const runtime = 'edge';
 export default async function Notes() {
   const supabase = createClient();
   const { data: notes, error } = await supabase.from("notes").select();
