@@ -12,7 +12,7 @@ export default function LoginPage() {
           <CardTitle className="text-center">登录到您的账户</CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-6">
+          <form className="space-y-6" action={login}>
             <div className="space-y-2">
               <Label htmlFor="email">邮箱</Label>
               <Input id="email" name="email" type="email" required placeholder="请输入邮箱" />
@@ -22,7 +22,7 @@ export default function LoginPage() {
               <Input id="password" name="password" type="password" required placeholder="请输入密码" />
             </div>
             <div className="flex gap-4 pt-2">
-              <Button className="w-full" formAction={login} type="submit">登录</Button>
+              <Button className="w-full" type="submit">登录</Button>
               <Button className="w-full" variant="outline" formAction={signup} type="submit">注册</Button>
             </div>
             <div className="pt-2 text-center">
