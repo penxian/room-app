@@ -1,8 +1,6 @@
-'use server'
-
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
-
+export const runtime = 'edge'
 export async function sendResetEmail(formData: FormData) {
   const email = formData.get('email') as string
   const supabase = createClient()
