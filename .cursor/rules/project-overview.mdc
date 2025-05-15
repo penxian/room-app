@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 项目概述
+
+这是一个使用 Next.js 14 构建的现代化 Web 应用程序，具有以下特点：
+
+## 技术栈
+- 前端框架：[Next.js](mdc:package.json)
+- 样式：使用 [Tailwind CSS](mdc:tailwind.config.ts)
+- 后端：使用 [Supabase](mdc:package.json)
+- 部署：支持 [Cloudflare Pages](mdc:wrangler.toml) 和 [Vercel](mdc:package.json)
+
+## 主要功能模块
+- 认证系统：[app/auth](mdc:app/auth)
+- 用户账户管理：[app/account](mdc:app/account)
+- 笔记功能：[app/notes](mdc:app/notes)
+- API 路由：[app/api](mdc:app/api)
+
+## 开发指南
+1. 使用 `npm run dev` 启动开发服务器
+2. 使用 `npm run build` 构建生产版本
+3. 使用 `npm run deploy` 部署到 Cloudflare Pages
+
+## 项目结构
+- `app/`: Next.js 应用主目录
+- `utils/`: 工具函数和辅助方法
+- `public/`: 静态资源文件
+- `middleware.ts`: 全局中间件配置
+

@@ -1,8 +1,7 @@
 import { type EmailOtpType } from '@supabase/supabase-js'
-import { type NextRequest } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 
 import { createClient } from '@/utils/supabase/server'
-import { redirect } from 'next/navigation'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -18,11 +17,11 @@ export async function GET(request: NextRequest) {
       token_hash,
     })
     if (!error) {
-      // redirect user to specified redirect URL or root of app
-      redirect(next)
+      // 校验成功，重定向到 next
+      return NextResponse.redirect(new URL(next, request.url), { status: 302 })
     }
   }
 
-  // redirect the user to an error page with some instructions
-  redirect('/error')
+  // 校验失败，重定向到 /error
+  return NextResponse.redirect(new URL('/error', request.url), { status: 302 })
 }

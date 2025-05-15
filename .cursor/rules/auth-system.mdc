@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 认证系统指南
+
+## 认证流程
+1. 用户通过 [app/login](mdc:app/login) 页面进行登录
+2. 认证状态通过 [middleware.ts](mdc:middleware.ts) 进行全局管理
+3. 受保护的路由在 [app/private](mdc:app/private) 目录下
+
+## 关键文件
+- 登录页面：[app/login/page.tsx](mdc:app/login/page.tsx)
+- 认证中间件：[middleware.ts](mdc:middleware.ts)
+- 认证相关 API：[app/api/auth](mdc:app/api/auth)
+
+## 开发注意事项
+1. 所有受保护的路由必须放在 `app/private` 目录下
+2. 使用 Supabase 的 SSR 功能进行认证
+3. 确保在开发时正确配置环境变量
+
+## 安全建议
+1. 始终使用 HTTPS
+2. 实现适当的 CSRF 保护
+3. 使用安全的密码策略
+4. 实现适当的会话管理
+

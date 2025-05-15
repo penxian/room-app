@@ -35,10 +35,18 @@ export async function signup(formData: FormData) {
     password: formData.get('password') as string,
   }
 
-  const { error } = await supabase.auth.signUp(data)
-
+  const { data: signUpData, error } = await supabase.auth.signUp(data)
+  console.log(signUpData, error)
   if (error) {
     redirect('/error')
+  }
+
+  // 注册成功后，插入 profile
+  if (signUpData.user) {
+    await supabase.from('profiles').insert({
+      id: signUpData.user.id,
+      username: data.email.split('@')[0], // 默认用邮箱前缀
+    })
   }
 
   revalidatePath('/', 'layout')
