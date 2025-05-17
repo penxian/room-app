@@ -32,24 +32,6 @@ export default function LoginPage() {
     }
   }
 
-  const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
-    const res = await fetch('/api/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    })
-    setLoading(false)
-    if (res.ok) {
-      router.push('/')
-    } else {
-      const data: any = await res.json()
-      setError(data.error || '注册失败')
-    }
-  }
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <Card className="w-full max-w-md shadow-lg">
@@ -71,7 +53,15 @@ export default function LoginPage() {
             {error && <div className="text-red-500 text-sm text-center">{error}</div>}
             <div className="flex gap-4 pt-2">
               <Button className="w-full" type="submit" disabled={loading}>{loading ? '登录中...' : '登录'}</Button>
-              <Button className="w-full" variant="outline" type="button" onClick={handleSignup} disabled={loading}>{loading ? '注册中...' : '注册'}</Button>
+              <Button
+                className="w-full"
+                variant="outline"
+                type="button"
+                onClick={() => router.push('/signup')}
+                disabled={loading}
+              >
+                注册
+              </Button>
             </div>
             <div className="pt-2 text-center">
               <a href="/auth/forgot" className="text-blue-600 hover:underline text-sm">忘记密码？</a>
