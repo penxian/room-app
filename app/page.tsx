@@ -1,6 +1,23 @@
+'use client'
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleSignout = async () => {
+    setLoading(true);
+    const res = await fetch("/api/signout", { method: "POST" });
+    setLoading(false);
+    if (res.ok) {
+      router.push("/login");
+    } else {
+      alert("退出失败");
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* 侧边栏 */}
@@ -30,12 +47,6 @@ export default function Home() {
             </li>
           </ul>
         </nav>
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-          <a href="#" className="flex items-center p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
-            <span className="material-icons mr-3">logout</span>
-            退出登录
-          </a>
-        </div>
       </aside>
       {/* 主内容区 */}
       <div className="flex-1 flex flex-col">
@@ -45,11 +56,14 @@ export default function Home() {
           <div className="flex items-center space-x-4">
             <span className="text-gray-600 dark:text-gray-300">管理员</span>
             <Image src="/vercel.svg" alt="avatar" width={32} height={32} className="rounded-full bg-gray-200" />
-            <form action="/auth/signout" method="post">
-              <button type="submit" className="ml-2 px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-red-500 hover:text-white transition">
-                退出登录
-              </button>
-            </form>
+            <button
+              type="button"
+              onClick={handleSignout}
+              className="ml-2 px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-red-500 hover:text-white transition"
+              disabled={loading}
+            >
+              {loading ? "正在退出..." : "退出登录"}
+            </button>
           </div>
         </header>
         {/* 内容区 */}
