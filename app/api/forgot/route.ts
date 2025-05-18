@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/utils/supabase/server'
 
 export const runtime = 'edge'
-export const config = { matcher: '/api/forgot' }
 
 export async function POST(req: NextRequest) {
   const { email } = (await req.json()) as { email: string }
